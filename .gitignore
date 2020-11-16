@@ -1,2 +1,5 @@
 #忽略.idea文件夹
 .idea
+
+#忽略每次生成的test_case.csv
+test_case.csv
