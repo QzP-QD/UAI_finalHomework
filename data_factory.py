@@ -38,12 +38,34 @@ def plot_cloud_model(Ex, En, He, n):
     return count
 
 
-f = open("test_case.csv", 'w', newline="")
-writer = csv.writer(f)
+f1 = open("training_case.csv", 'w', newline="")
+writer1 = csv.writer(f1)
 for i in range(10):
     temp_cout = plot_cloud_model(0,1,0.25,1000)
     print(temp_cout)
-    writer.writerow(temp_cout)
+    writer1.writerow(temp_cout)
     time.sleep(1)
-f.close()
+
+for i in range(10):
+    temp_cout = plot_cloud_model(0, 2, 1, 1000)
+    print(temp_cout)
+    writer1.writerow(temp_cout)
+    time.sleep(1)
+
+f1.close()
+
+f2 = open("test_case.csv", 'w', newline="")
+writer2 = csv.writer(f2)
+for i in range(10):
+    temp_cout = plot_cloud_model(0,1,0.25,1000)
+    print(temp_cout)
+    writer2.writerow(temp_cout)
+    time.sleep(1)
+
+for i in range(10):
+    temp_cout = plot_cloud_model(0, 2, 1, 1000)
+    print(temp_cout)
+    writer2.writerow(temp_cout)
+    time.sleep(1)
+f2.close()
 
