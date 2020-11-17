@@ -37,5 +37,4 @@ m.fit(input_x, all_y_trues, epochs=1000, batch_size=1, verbose=0)
 
 for i in range(len(test_case)):
     temp_case = np.array([test_case[i]])
-    print(temp_case)
     print("Case" + str(i) + ": " + str(m.predict(temp_case)) )
