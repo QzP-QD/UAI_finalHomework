@@ -4,3 +4,5 @@
 #忽略每次生成的test_case.csv
 test_case.csv
 training_case.csv
+test_case_3_output.csv
+training_case_3_output.csv
