@@ -33,7 +33,7 @@ outputs = tf.keras.layers.Dense(1, use_bias=True, activation='sigmoid')(x)
 m = tf.keras.Model(inputs, outputs)     # 使用 输入 和 输出 创建模型
 
 m.compile(tf.keras.optimizers.SGD(learning_rate=0.1), 'mse')
-m.fit(input_x, all_y_trues, epochs=1000, batch_size=1, verbose=0)
+m.fit(input_x, all_y_trues, epochs=1000, batch_size=1, verbose=1)
 
 for i in range(len(test_case)):
     temp_case = np.array([test_case[i]])
