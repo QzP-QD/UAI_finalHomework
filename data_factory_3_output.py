@@ -1,4 +1,6 @@
-# 生成数据文件——10000组包含1000个点的数据集
+# 生成数据文件——10000组包含100个点的数据集
+# 名字带_split后缀的是用分片作为输入的模型
+# 名字不带_split后缀的是用所有很坐标作为输入的模型
 import numpy as np
 from time import time
 import csv
@@ -18,10 +20,10 @@ def plot_cloud_model(Ex, En, He, n):
 
     temp = np.zeros((100,1))
 
-    # topEdge = En + 3 * He
-    # buttonEdge = En - 3 * He
-    # section = np.linspace(buttonEdge, topEdge, 100)
-    # section = section.tolist()
+    topEdge = En + 3 * He
+    buttonEdge = En - 3 * He
+    section = np.linspace(buttonEdge, topEdge, 100)
+    section = section.tolist()
 
     for i in range(n):
         np.random.seed(int(time.time()) + i + 1)
@@ -29,25 +31,25 @@ def plot_cloud_model(Ex, En, He, n):
 
         X[i] = np.random.normal(loc=Ex, scale=np.abs(Enn), size=1)
 
-        # for j in range(100):
-        #     if j < 99:
-        #         if X[i] >= section[j] and X[i] < section[j+1]:
-        #             temp[j][0] += 1
-        #             break
+        for j in range(100):
+            if j < 99:
+                if X[i] >= section[j] and X[i] < section[j+1]:
+                    temp[j][0] += 1
+                    break
 
-    # temp = temp.tolist()
-    # count = []
-    # for i in range(100):
-    #     count.append(temp[i][0])
-    return X
+    temp = temp.tolist()
+    count = []
+    for i in range(100):
+        count.append(temp[i][0])
+    return count
 
 
-f1 = open("training_case_3_output.csv", 'w', newline="")
-f1_1 = open("training_case_3_output_label.csv", 'w', newline="")
+f1 = open("training_case_3_output_split.csv", 'w', newline="")
+f1_1 = open("training_case_3_output_label_split.csv", 'w', newline="")
 writer1 = csv.writer(f1)
 writer1_1 = csv.writer(f1_1)
 for i in range(900):
-    temp_cout = plot_cloud_model(0,1,0.25,100)
+    temp_cout = plot_cloud_model(0,1,0.25,1000)
     writer1.writerow(temp_cout)
     writer1_1.writerow([0,1,0.25])
     time.sleep(1)
@@ -55,21 +57,21 @@ for i in range(900):
 for i in range(100):
     temp_en = random.uniform(10,20)
     temp_he = random.uniform(10,20)
-    temp_cout = plot_cloud_model(0,temp_en,temp_he,100)
+    temp_cout = plot_cloud_model(0,temp_en,temp_he,1000)
     writer1.writerow(temp_cout)
     writer1_1.writerow([0, temp_en, temp_he])
 
 f1.close()
 
-f2 = open("test_case_3_output.csv", 'w', newline="")
+f2 = open("test_case_3_output_split.csv", 'w', newline="")
 writer2 = csv.writer(f2)
 for i in range(10):
-    temp_cout = plot_cloud_model(0,1,0.25,100)
+    temp_cout = plot_cloud_model(0,1,0.25,1000)
     writer2.writerow(temp_cout)
     time.sleep(1)
 
 for i in range(10):
-    temp_cout = plot_cloud_model(0,random.uniform(10,20),random.uniform(10,20),100)
+    temp_cout = plot_cloud_model(0,random.uniform(10,20),random.uniform(10,20),1000)
     writer2.writerow(temp_cout)
 
 f2.close()

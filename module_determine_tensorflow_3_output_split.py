@@ -1,10 +1,10 @@
 import tensorflow as tf
 import numpy as np
 import csv
-import  matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 input_x = []
-f1 = csv.reader(open('training_case_3_output.csv','r'))
+f1 = csv.reader(open('training_case_3_output_split.csv','r'))
 for index, i in enumerate(f1):
     temp_x = []
     for elm in range(len(i)):
@@ -12,7 +12,7 @@ for index, i in enumerate(f1):
     input_x.insert(index, temp_x)
 
 lables = [] # 对应输入数据的预期 输出向量
-f1_1 = csv.reader(open('training_case_3_output_label.csv','r'))
+f1_1 = csv.reader(open('training_case_3_output_label_split.csv','r'))
 for index, i in enumerate(f1_1):
     temp_x = []
     for elm in range(len(i)):
@@ -20,7 +20,7 @@ for index, i in enumerate(f1_1):
     lables.append(temp_x)
 
 test_case = []
-f2 = csv.reader(open('test_case_3_output.csv','r'))
+f2 = csv.reader(open('test_case_3_output_split.csv','r'))
 for index, i in enumerate(f2):
     temp_x = []
     for elm in range(len(i)):
@@ -40,7 +40,7 @@ H = m.fit(input_x, lables, epochs=1000, batch_size=100, verbose=1)
 plt.plot(np.arange(0, 1000), H.history["loss"], label="train_loss")
 
 # 保存模型
-m.save('3_output_all_x.h5') # 以横坐标为输入的模型
+m.save('3_output_split.h5') # 分片作为输入
 
 for i in range(len(test_case)):
     temp_case = np.array([test_case[i]])
